@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "homepage": "https://github.com/alpnstar/miscellaneous-store",
+  "homepage": "https://github.com/alpnstar/google-maps",
   "scripts": {
     "start": "webpack serve --node-env=development",
     "build-dev": "webpack",

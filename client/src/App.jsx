@@ -21,6 +21,8 @@ const App = () => {
         }))
     }
 
+    console.log(addresses)
+
     function handleChangeAddress({target}) {
         setAddress(target.value);
     }
@@ -94,7 +96,7 @@ const Map = ({setPosition, coordValues, setCoordValues, address, setAddress, set
 
     async function getCoordsByAddress(address) {
         try {
-            const results = await geocodeRequest(address);
+            const {results} = await geocodeRequest(address);
             if (results) setAddresses(results);
         } catch (err) {
             console.log(err)
@@ -112,6 +114,7 @@ const Map = ({setPosition, coordValues, setCoordValues, address, setAddress, set
                     location: {...params},
                 });
                 if (response) setAddress(response.results[0].formatted_address);
+                console.log('by-coord')
 
             } catch (err) {
                 console.log(err);
@@ -125,7 +128,7 @@ const Map = ({setPosition, coordValues, setCoordValues, address, setAddress, set
     }
 
     useEffect(() => {
-        if (!address) return
+        if (!address) return setAddresses([]);
         getCoordsByAddress({address});
     }, [address]);
 
@@ -158,10 +161,11 @@ const Map = ({setPosition, coordValues, setCoordValues, address, setAddress, set
             });
         }
     }, [map]);
+
     return (
         <div style={{display: 'flex', gap: '10px', alignItems: 'start'}} className="app">
             <div ref={ref}
-                 style={{height: '95vh', width: '100vw'}}/>
+                 style={{height: '70vh', width: '100vw'}}/>
             {React.Children.map(children, (child) => {
                 if (React.isValidElement(child)) {
                     return React.cloneElement(child, {map});
