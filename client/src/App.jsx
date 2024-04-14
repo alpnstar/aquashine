@@ -59,7 +59,7 @@ const App = () => {
                        onChange={handleChangeCoord}/>
                 <input type="text" placeholder="Адрес" name="address" value={address}
                        onChange={handleChangeAddress}/>
-                {!!addresses.length &&
+                {!!addresses.length && !!address &&
                     <ul>
                         {addresses.map(item =>
                             <li style={{cursor: 'pointer'}}
