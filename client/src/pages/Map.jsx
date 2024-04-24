@@ -167,7 +167,7 @@ const Map = () => {
                 </GoogleMapsMap>
             </Wrapper>
             <aside className="map__side">
-                <form onSubmit={(e)=>e.preventDefault()} className="map__form">
+                <form onSubmit={(e) => e.preventDefault()} className="map__form">
                     <div className="map__form-inner">
                         {step === 1 ?
                             <>
@@ -301,14 +301,16 @@ const Map = () => {
                                                 car wash </p>
                                             <p> You will receive an email confirmation with your order details
                                                 shortly </p>
-                                            <button className="main_button">
+                                            <button onClick={() => setStep(1)} className="main_button">
                                                 Follow the order
                                             </button>
-                                            <button className="map__button map__button--back map__button--max-width">
+                                            <button onClick={() => setStep(1)}
+                                                    className="map__button map__button--back map__button--max-width">
                                                 Place another order
                                             </button>
                                         </div>
                                         <button
+                                            onClick={() => setStep(1)}
                                             className="map__form-end-learn_more map__button map__button--back map__button--max-width map__button--black">
                                             Learn more about AquaShine
                                         </button>
