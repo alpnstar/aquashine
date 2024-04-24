@@ -114,7 +114,7 @@ const packages = [{
 }]
 
 const Map = () => {
-    const [step, setStep] = useState(2);
+    const [step, setStep] = useState(1);
     const [markerPos, setMarkerPos] = useState();
     const [addresses, setAddresses] = useState([]);
     const [address, setAddress] = useState('');
