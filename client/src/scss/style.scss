@@ -27,12 +27,17 @@ html {
 
 }
 
-.header {
-  width: 100%;
-}
-
 .main {
   height: 100%;
 }
 
 
+.main_button {
+  width: 100%;
+  min-height: 48px;
+  color: #fff;
+  background: #3261fb;
+  border-radius: 12px;
+  padding: 12px 24px;
+  transition: .15s ease-in;
+}

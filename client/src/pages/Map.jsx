@@ -3,6 +3,7 @@ import {setLatLng} from "../utils/common";
 import {Wrapper} from "@googlemaps/react-wrapper";
 import GoogleMapsMap from "../components/Map/GoogleMapsMap";
 import GoogleMapsMarker from "../components/Map/GoogleMapsMarker";
+import lastImg from "../../public/images/third_step_img.png";
 import '../components/Map/map.scss';
 
 const parkingTypes = [{
@@ -117,7 +118,9 @@ const Map = () => {
     const [step, setStep] = useState(1);
     const [markerPos, setMarkerPos] = useState();
     const [addresses, setAddresses] = useState([]);
+    const [displayAddresses, setDisplayAddresses] = useState(false);
     const [address, setAddress] = useState('');
+    const [phone, setPhone] = useState('');
     const [coordValues, setCoordValues] = useState({
         lat: '',
         lng: '',
@@ -148,6 +151,7 @@ const Map = () => {
 
     }
 
+    console.log(phone)
     return (
         <article className="map">
             <Wrapper apiKey={"AIzaSyDAbxRYrt3BHfbm79UDudSK-k4eayEiUK8"} render={render}>
@@ -163,40 +167,47 @@ const Map = () => {
                 </GoogleMapsMap>
             </Wrapper>
             <aside className="map__side">
-                <form className="map__form">
+                <form onSubmit={(e)=>e.preventDefault()} className="map__form">
                     <div className="map__form-inner">
                         {step === 1 ?
                             <>
 
                                 <div className="map__form-section">
                                     <h2 className="map__form-title">Add parking details</h2>
-                                    <input className="map__form-input" type="text" placeholder="Enter latitude"
+                                    {/*<input className="map__form-input" type="text" placeholder="Enter latitude"
                                            name="lat"
                                            value={coordValues.lat}
                                            onChange={handleChangeCoord}/>
                                     <input className="map__form-input" type="text" placeholder="Enter longitude"
                                            name="lng"
                                            value={coordValues.lng}
-                                           onChange={handleChangeCoord}/>
-                                    <input className="map__form-input" type="text" placeholder="Enter address"
-                                           name="address"
-                                           value={address}
-                                           onChange={handleChangeAddress}/>
-                                    <div className="map__form-addresses-wrapper">
-                                        {!!addresses.length && !!address &&
-                                            <ul>
-                                                {addresses.map(item =>
-                                                    <li key={Math.random()} style={{cursor: 'pointer'}}
-                                                        onClick={() => {
-                                                            setAddress(item.formatted_address);
-                                                            const {location} = item.geometry;
-                                                            setMarkerPos(setLatLng(location.lat(), location.lng()))
-                                                            setCoordValues(setLatLng(location.lat(), location.lng()))
-                                                        }}
-                                                    >
-                                                        {item.formatted_address}
-                                                    </li>)}
-                                            </ul>}
+                                           onChange={handleChangeCoord}/>*/}
+                                    <div className="map__address-select">
+                                        <input
+                                            onFocus={() => setDisplayAddresses(true)}
+                                            className="map__form-input" type="text" placeholder="Enter address"
+                                            name="address"
+                                            value={address}
+                                            onChange={handleChangeAddress}/>
+                                        {!!addresses.length && displayAddresses && !!address &&
+                                            <div className="map__form-addresses-wrapper">
+                                                <ul>
+                                                    {addresses.map(item =>
+                                                        <li key={Math.random()} style={{cursor: 'pointer'}}
+                                                            onClick={(e) => {
+                                                                setAddress(item.formatted_address);
+                                                                const {location} = item.geometry;
+                                                                setMarkerPos(setLatLng(location.lat(), location.lng()))
+                                                                setCoordValues(setLatLng(location.lat(), location.lng()))
+                                                                setDisplayAddresses(false);
+                                                            }}
+                                                        >
+                                                            {item.formatted_address}
+                                                        </li>)}
+
+                                                </ul>
+                                            </div>
+                                        }
 
                                     </div>
                                     <h3>Type of parking</h3>
@@ -232,8 +243,9 @@ const Map = () => {
                                 <>
                                     <div className="map__form-section">
                                         <h2 className="map__form-title">Phone number</h2>
-                                        <input className="map__form-input" type="text" placeholder="Enter your number"
-                                               name="number"
+                                        <input className="map__form-input" value={phone}
+                                               onChange={(({target}) => setPhone(target.value))} type="tel"
+                                               placeholder="Enter your number"
                                         />
                                     </div>
                                     <div className="map__form-section map__form-section--last">
@@ -270,7 +282,7 @@ const Map = () => {
                                         </ul>
                                         <div className="map__button-wrapper">
                                             <button onClick={() => setStep(step - 1)} type="button"
-                                                    className="map__button map__button--back">
+                                                    className="map__button map__button--back map__button">
                                                 Back
                                             </button>
                                             <button onClick={() => setStep(step + 1)} type="button"
@@ -280,7 +292,29 @@ const Map = () => {
 
                                         </div>
                                     </div>
-                                </> : step === 3 ? <h1 className="map__success">Done!</h1> : ''
+                                </> : step === 3 ? <div className="map__form-section map__form-section--last">
+                                    <div className="map__form-end">
+                                        <div className="map__form-end-content">
+                                            <img src={lastImg} alt=""/>
+                                            <h2>Your order has been received!</h2>
+                                            <p> Our operator will contact you to find the best time and date for your
+                                                car wash </p>
+                                            <p> You will receive an email confirmation with your order details
+                                                shortly </p>
+                                            <button className="main_button">
+                                                Follow the order
+                                            </button>
+                                            <button className="map__button map__button--back map__button--max-width">
+                                                Place another order
+                                            </button>
+                                        </div>
+                                        <button
+                                            className="map__form-end-learn_more map__button map__button--back map__button--max-width map__button--black">
+                                            Learn more about AquaShine
+                                        </button>
+
+                                    </div>
+                                </div> : ''
                         }
                     </div>
                 </form>

@@ -83,10 +83,21 @@
     }
   }
 
+  &__address-select {
+    position: relative;
+  }
+
   &__form-addresses-wrapper {
+    border: 1px black solid;
+    position: absolute;
     padding: 10px;
-    border-radius: 12px;
+    border-radius: 5px;
     background: rgb(245, 248, 255);
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
   }
 
   &__form-section {
@@ -133,6 +144,16 @@
       width: 50%;
       border: 2px solid rgb(227, 231, 238);
       color: #c8bec8;
+    }
+
+    &--max-width {
+      width: 100%;
+    }
+
+    &--black {
+      color: black;
+      font-weight: 700;
+
     }
   }
 
@@ -251,11 +272,27 @@
     }
   }
 
-  &__success {
-    text-align: center;
-    font-size: 26px;
-    margin-top: 100%;
-    transform: translateY(-50%);
+  &__form-end {
+    &-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+
+      p {
+        color: rgb(156 163 175);
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+      }
+
+
+    }
+
+    &-learn_more {
+      margin-top: 40px;
+    }
+
+
   }
 
   h2 {
