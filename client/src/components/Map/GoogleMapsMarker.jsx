@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 
-const Marker = (options) => {
+const GoogleMapsMarker = (options) => {
     const [marker, setMarker] = useState();
 
     useEffect(() => {
@@ -20,4 +20,4 @@ const Marker = (options) => {
 
     return null;
 };
-export default Marker;
+export default GoogleMapsMarker;

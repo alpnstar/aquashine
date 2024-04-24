@@ -3,20 +3,35 @@
 @import "../styles/reset.css";
 @import "../styles/fonts.css";
 
-body,
-html,
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
+* {
   box-sizing: border-box;
-  font-family: sans-serif;
+  font-family: Inter, sans-serif;
+
 }
 
 body,
 html {
   width: 100%;
+  height: 100%;
+
+}
+
+#root {
+  height: 100%;
+
+}
+
+.app {
+  width: 100%;
+  height: 100%;
+
+}
+
+.header {
+  width: 100%;
+}
+
+.main {
   height: 100%;
 }
 

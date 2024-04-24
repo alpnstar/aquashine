@@ -1,8 +1,8 @@
 import React, {useEffect, useRef, useState} from "react";
-import {setLatLng} from "../utils/common";
-import {useDeepCompareEffectForMaps} from "../hooks/useDeepCompareEffectForMaps";
+import {setLatLng} from "../../utils/common";
+import {useDeepCompareEffectForMaps} from "../../hooks/useDeepCompareEffectForMaps";
 
-const Map = ({setPosition, coordValues, address, setAddress, setAddresses, children}) => {
+const GoogleMapsMap = ({setPosition, coordValues, address, setAddress, setAddresses, className, children}) => {
     const ref = useRef(null);
 
     const [map, setMap] = useState();
@@ -11,6 +11,7 @@ const Map = ({setPosition, coordValues, address, setAddress, setAddresses, child
         lat: 0,
         lng: 0,
     });
+
 
     async function getCoordsByAddress(address) {
         try {
@@ -53,7 +54,13 @@ const Map = ({setPosition, coordValues, address, setAddress, setAddresses, child
     }, [coordValues]);
     useEffect(() => {
         if (ref.current && !map)
-            setMap(new window.google.maps.Map(ref.current, {}));
+            setMap(new window.google.maps.Map(ref.current, {
+                center: {
+                    lat: 25.276987,
+                    lng: 55.296249,
+                },
+                disableDefaultUI: true,
+            }));
 
     }, [ref, map]);
     useDeepCompareEffectForMaps(() => {
@@ -76,15 +83,14 @@ const Map = ({setPosition, coordValues, address, setAddress, setAddresses, child
     }, [map]);
 
     return (
-        <div style={{display: 'flex', gap: '10px', alignItems: 'start'}} className="app">
-            <div ref={ref}
-                 style={{height: '70vh', width: '100vw'}}/>
+        <>
+            <div className={className} ref={ref}/>
             {React.Children.map(children, (child) => {
                 if (React.isValidElement(child)) {
                     return React.cloneElement(child, {map});
                 }
             })}
-        </div>
+        </>
     )
 }
-export default Map;
+export default GoogleMapsMap;

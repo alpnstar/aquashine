@@ -1,6 +1,6 @@
 import {useEffect, useRef} from "react";
 import {createCustomEqual} from "fast-equals";
-import { isLatLngLiteral } from "@googlemaps/typescript-guards";
+import {isLatLngLiteral} from "@googlemaps/typescript-guards";
 
 const deepCompareEqualsForMaps = createCustomEqual(
     (deepEqual) => (a, b) => {
